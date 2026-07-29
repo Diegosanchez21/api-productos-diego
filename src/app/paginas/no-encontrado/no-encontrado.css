@@ -1,0 +1,10 @@
+section {
+  max-width: 620px;
+  margin: 3rem auto;
+  text-align: center;
+}
+
+a {
+  margin-top: 1rem;
+  text-decoration: none;
+}

@@ -1,0 +1,51 @@
+.encabezado {
+  display: grid;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.encabezado p {
+  margin-bottom: 0;
+  color: var(--p-primary-color);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.encabezado h1 {
+  margin-bottom: 0;
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+.encabezado span {
+  color: #4b5563;
+}
+
+.volver {
+  display: inline-block;
+  margin-top: 1rem;
+  text-decoration: none;
+}
+
+.cuadricula {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem;
+}
+
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.acciones a {
+  text-decoration: none;
+}
+
+@media (max-width: 620px) {
+  .cuadricula {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,25 @@
+<p-card [header]="producto().nombre">
+  <p>{{ producto().descripcion }}</p>
+
+  <p-tag
+    severity="success"
+    [rounded]="true"
+    [value]="'$' + producto().precio.toLocaleString('es-MX')"
+  />
+
+  <ng-template #footer>
+    <div class="acciones">
+      <a [routerLink]="['/productos', producto().id]" pButton>
+        <span pButtonLabel>Ver detalle</span>
+      </a>
+
+      <p-button
+        [label]="esFavorito() ? 'En favoritos' : 'Agregar a favoritos'"
+        [severity]="esFavorito() ? 'success' : 'secondary'"
+        [variant]="esFavorito() ? undefined : 'outlined'"
+        [disabled]="esFavorito()"
+        (onClick)="agregarAFavoritos()"
+      />
+    </div>
+  </ng-template>
+</p-card>

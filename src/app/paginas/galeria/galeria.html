@@ -1,0 +1,50 @@
+<div class="galeria-container">
+  <h2 class="galeria-titulo">The devil may cry</h2>
+
+  <p-galleria
+    [value]="images"
+    [numVisible]="5"
+    [circular]="true"
+    [showItemNavigators]="true"
+    [showThumbnails]="true"
+    [responsiveOptions]="responsiveOptions"
+    [containerStyle]="{ 'max-width': '900px', margin: '0 auto' }"
+  >
+    <ng-template #item let-item>
+      <img
+        [src]="item.itemImageSrc"
+        [alt]="item.alt"
+        (click)="abrirGaleria(images.indexOf(item))"
+        class="galeria-imagen-principal"
+      />
+    </ng-template>
+    <ng-template #thumbnail let-item>
+      <img [src]="item.thumbnailImageSrc" [alt]="item.alt" class="galeria-thumbnail" />
+    </ng-template>
+  </p-galleria>
+
+  <!-- Vista de miniaturas en grilla, alternativa/complementaria -->
+  <div class="galeria-grid">
+    @for (img of images; track img.title; let i = $index) {
+      <div class="galeria-item" (click)="abrirGaleria(i)">
+        <img [src]="img.thumbnailImageSrc" [alt]="img.alt" />
+        <span class="galeria-item-titulo">{{ img.title }}</span>
+      </div>
+    }
+  </div>
+
+  <!-- Modal de pantalla completa -->
+  <p-galleria
+    [(visible)]="displayFullscreen"
+    [value]="images"
+    [activeIndex]="activeIndex"
+    [fullScreen]="true"
+    [circular]="true"
+    [showItemNavigators]="true"
+    [showThumbnails]="false"
+  >
+    <ng-template #item let-item>
+      <img [src]="item.itemImageSrc" [alt]="item.alt" class="galeria-imagen-fullscreen" />
+    </ng-template>
+  </p-galleria>
+</div>

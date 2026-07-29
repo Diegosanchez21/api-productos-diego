@@ -1,0 +1,62 @@
+.contacto {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.8fr) minmax(280px, 1.2fr);
+  gap: 2rem;
+  align-items: start;
+}
+
+header p {
+  margin-bottom: 0.4rem;
+  color: var(--p-primary-color);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+header h1 {
+  margin-bottom: 0.5rem;
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+header span {
+  color: #4b5563;
+  line-height: 1.6;
+}
+
+form {
+  display: grid;
+  gap: 1rem;
+  padding: 1.5rem;
+  border: 1px solid #dbe3ef;
+  border-radius: 1rem;
+  background: white;
+  box-shadow: 0 16px 35px rgb(15 23 42 / 8%);
+}
+
+.campo {
+  display: grid;
+  gap: 0.4rem;
+}
+
+label {
+  font-weight: 650;
+}
+
+input,
+textarea {
+  width: 100%;
+}
+
+.contacto > p-message {
+  grid-column: 2;
+}
+
+@media (max-width: 720px) {
+  .contacto {
+    grid-template-columns: 1fr;
+  }
+
+  .contacto > p-message {
+    grid-column: 1;
+  }
+}

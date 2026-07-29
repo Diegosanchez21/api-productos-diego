@@ -1,0 +1,83 @@
+<header class="encabezado">
+  <p>TUS SELECCIONES</p>
+  <h1>Mis favoritos</h1>
+  <span>
+    Aquí puedes revisar los productos que has marcado como favoritos.
+    Se conservan solamente mientras la aplicación permanezca abierta.
+  </span>
+
+  @if (favoritos().length > 0) {
+    <p-tag
+      severity="info"
+      [rounded]="true"
+      [value]="favoritos().length + ' producto(s) en favoritos'"
+    />
+  }
+</header>
+
+@if (favoritos().length === 0) {
+  <p-message severity="warn">
+    Todavía no has agregado ningún producto a favoritos.
+  </p-message>
+
+  <a routerLink="/productos" pButton class="volver">
+    <span pButtonLabel>Ir al catálogo</span>
+  </a>
+} @else {
+  <section class="cuadricula">
+    @for (producto of favoritos(); track producto.id) {
+      <p-card [header]="producto.nombre">
+        <p>{{ producto.descripcion }}</p>
+
+        <p-tag
+          severity="success"
+          [rounded]="true"
+          [value]="'$' + producto.precio.toLocaleString('es-MX')"
+        />
+
+        <ng-template #footer>
+          <div class="acciones">
+            <a [routerLink]="['/productos', producto.id]" pButton>
+              <span pButtonLabel>Ver detalle</span>
+            </a>
+
+            <p-button
+              label="Quitar"
+              severity="danger"
+              variant="outlined"
+              (onClick)="pedirConfirmacion(producto)"
+            />
+          </div>
+        </ng-template>
+      </p-card>
+    }
+  </section>
+}
+
+<p-dialog
+  header="Quitar de favoritos"
+  [(visible)]="mostrarConfirmacion"
+  [modal]="true"
+  [style]="{ width: 'min(28rem, 90vw)' }"
+>
+  @if (productoAEliminar) {
+    <p>
+      ¿Seguro que quieres quitar <strong>{{ productoAEliminar.nombre }}</strong>
+      de tus favoritos?
+    </p>
+  }
+
+  <ng-template #footer>
+    <p-button
+      label="Cancelar"
+      severity="secondary"
+      variant="outlined"
+      (onClick)="cancelarEliminacion()"
+    />
+    <p-button
+      label="Sí, quitar"
+      severity="danger"
+      (onClick)="confirmarEliminacion()"
+    />
+  </ng-template>
+</p-dialog>

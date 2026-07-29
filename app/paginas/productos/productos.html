@@ -1,0 +1,22 @@
+<header class="encabezado">
+  <p>CATÁLOGO LOCAL</p>
+  <h1>Productos</h1>
+  <span>Selecciona un producto para consultar su información completa.</span>
+</header>
+
+@if (mensajeFavorito) {
+  <p-message severity="success" closable (onClose)="mensajeFavorito = null">
+    {{ mensajeFavorito }}
+  </p-message>
+}
+
+<section class="cuadricula">
+  @for (producto of productos; track producto.id) {
+    <app-tarjeta-producto
+      [producto]="producto"
+      (agregado)="alAgregarFavorito($event)"
+    />
+  } @empty {
+    <p>No hay productos disponibles.</p>
+  }
+</section>

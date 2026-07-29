@@ -1,0 +1,38 @@
+:host {
+  display: block;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.marca {
+  color: var(--p-primary-color);
+  font-size: 1.15rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+nav a {
+  text-decoration: none;
+}
+
+nav a.activo {
+  outline: 3px solid color-mix(in srgb, var(--p-primary-color) 25%, transparent);
+  outline-offset: 2px;
+}
+
+@media (max-width: 620px) {
+  :host {
+    position: static;
+  }
+
+  nav {
+    margin-top: 0.75rem;
+  }
+}

@@ -1,0 +1,52 @@
+@if (producto) {
+  <section class="detalle">
+    <p-card [header]="producto.nombre" subheader="Información del producto">
+      <p>{{ producto.descripcion }}</p>
+
+      <p-tag
+        severity="success"
+        [rounded]="true"
+        [value]="'$' + producto.precio.toLocaleString('es-MX')"
+      />
+
+      <ng-template #footer>
+        <div class="acciones">
+          <a routerLink="/productos" pButton>
+            <span pButtonLabel>Volver al catálogo</span>
+          </a>
+
+          <p-button
+            label="Solicitar información"
+            severity="secondary"
+            variant="outlined"
+            (onClick)="mostrarDialogo = true"
+          />
+        </div>
+      </ng-template>
+    </p-card>
+
+    <p-dialog
+      header="Información del producto"
+      [(visible)]="mostrarDialogo"
+      [modal]="true"
+      [style]="{ width: 'min(28rem, 90vw)' }"
+    >
+      <p>
+        Has seleccionado <strong>{{ producto.nombre }}</strong>.
+        Puedes utilizar la página de contacto para solicitar más información.
+      </p>
+
+      <ng-template #footer>
+        <p-button label="Cerrar" (onClick)="mostrarDialogo = false" />
+      </ng-template>
+    </p-dialog>
+  </section>
+} @else {
+  <section class="sin-producto">
+    <p-message severity="warn">No existe un producto con ese identificador.</p-message>
+
+    <a routerLink="/productos" pButton>
+      <span pButtonLabel>Volver al catálogo</span>
+    </a>
+  </section>
+}

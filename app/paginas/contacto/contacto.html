@@ -1,0 +1,80 @@
+<section class="contacto">
+  <header>
+    <p>ESCRÍBENOS</p>
+    <h1>Contacto</h1>
+    <span>Completa los campos para practicar formularios y validaciones visuales.</span>
+  </header>
+
+  <form #formulario="ngForm" (ngSubmit)="enviar()">
+    <div class="campo">
+      <label for="nombre">Nombre</label>
+      <input
+        id="nombre"
+        name="nombre"
+        pInputText
+        [(ngModel)]="nombre"
+        #nombreCampo="ngModel"
+        [invalid]="nombreCampo.invalid && nombreCampo.touched"
+        required
+      />
+
+      @if (nombreCampo.invalid && nombreCampo.touched) {
+        <p-message severity="error" size="small" variant="simple">
+          Escribe tu nombre.
+        </p-message>
+      }
+    </div>
+
+    <div class="campo">
+      <label for="correo">Correo electrónico</label>
+      <input
+        id="correo"
+        name="correo"
+        type="email"
+        pInputText
+        [(ngModel)]="correo"
+        #correoCampo="ngModel"
+        [invalid]="correoCampo.invalid && correoCampo.touched"
+        required
+        email
+      />
+
+      @if (correoCampo.invalid && correoCampo.touched) {
+        <p-message severity="error" size="small" variant="simple">
+          Escribe un correo válido.
+        </p-message>
+      }
+    </div>
+
+    <div class="campo">
+      <label for="mensaje">Mensaje</label>
+      <textarea
+        id="mensaje"
+        name="mensaje"
+        rows="5"
+        pTextarea
+        [autoResize]="true"
+        [(ngModel)]="mensaje"
+        #mensajeCampo="ngModel"
+        [invalid]="mensajeCampo.invalid && mensajeCampo.touched"
+        required
+      ></textarea>
+
+      @if (mensajeCampo.invalid && mensajeCampo.touched) {
+        <p-message severity="error" size="small" variant="simple">
+          Escribe un mensaje.
+        </p-message>
+      }
+    </div>
+
+    <button type="submit" pButton [disabled]="formulario.invalid">
+      <span pButtonLabel>Enviar mensaje</span>
+    </button>
+  </form>
+
+  @if (enviado) {
+    <p-message severity="success" closable>
+      Gracias, {{ nombre }}. El mensaje se registró únicamente en esta práctica.
+    </p-message>
+  }
+</section>

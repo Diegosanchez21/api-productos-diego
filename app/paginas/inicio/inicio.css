@@ -1,0 +1,43 @@
+.portada {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.portada > p-card {
+  display: block;
+  max-width: 760px;
+}
+
+.distintivo {
+  color: var(--p-primary-color);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+h1 {
+  max-width: 650px;
+  margin-bottom: 1rem;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.05;
+}
+
+.introduccion {
+  max-width: 680px;
+  margin-bottom: 1.5rem;
+  color: #4b5563;
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.resumen {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.resumen p {
+  margin-bottom: 0;
+  color: #4b5563;
+  line-height: 1.6;
+}

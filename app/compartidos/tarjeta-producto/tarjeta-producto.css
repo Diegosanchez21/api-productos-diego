@@ -1,0 +1,26 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
+p-card {
+  display: block;
+  height: 100%;
+}
+
+p {
+  min-height: 3rem;
+  color: #4b5563;
+  line-height: 1.5;
+}
+
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.acciones a {
+  text-decoration: none;
+}
