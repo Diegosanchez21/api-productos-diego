@@ -7,7 +7,8 @@
 .panel-formulario h2, .productos-relacionados h2 { margin-top: 0; }
 .panel-formulario form { align-items: end; display: flex; flex-wrap: wrap; gap: .75rem; }
 .panel-formulario label { display: block; font-weight: 700; width: 100%; }
-.panel-formulario input { border: 1px solid #9ca3af; border-radius: .5rem; font: inherit; padding: .65rem; min-width: min(100%, 20rem); }
+.panel-formulario input, .panel-formulario textarea { border: 1px solid #9ca3af; border-radius: .5rem; font: inherit; padding: .65rem; min-width: min(100%, 20rem); }
+.panel-formulario textarea { min-height: 5rem; resize: vertical; }
 .acciones-formulario, .acciones-categoria { display: flex; gap: .5rem; }
 button { border: 0; border-radius: .5rem; background: var(--p-primary-color); color: white; cursor: pointer; font: inherit; font-weight: 700; padding: .65rem .85rem; }
 button.secundario, button.enlace { background: #e5e7eb; color: #374151; }
@@ -19,4 +20,9 @@ button.peligro { color: #b91c1c; }
 .selector span { color: #6b7280; font-size: .9rem; font-weight: 400; }
 .acciones-categoria { border-top: 1px solid #e5e7eb; padding: .65rem; }
 .productos-relacionados { margin-top: 2rem; }
+.producto-formulario { margin-top: 1rem; }
+.producto-formulario form { display: grid; grid-template-columns: minmax(10rem, 1fr) 2fr; }
+.producto-formulario .acciones-formulario { grid-column: 1 / -1; }
+.producto-con-acciones { display: grid; gap: .5rem; }
+.editar-producto { justify-self: start; }
 @media (max-width: 500px) { .panel-formulario input { width: 100%; } }

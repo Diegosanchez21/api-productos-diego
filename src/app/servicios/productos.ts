@@ -1,10 +1,15 @@
-import { Injectable, signal } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Injectable, inject, signal } from '@angular/core';
+import { tap } from 'rxjs';
 import { Producto } from '../modelos/producto';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductosServicio {
+  private readonly http = inject(HttpClient);
+  private readonly url = `${environment.apiUrl.replace(/\/$/, '')}/api/productos`;
   private readonly listaProductos = signal<Producto[]>([
     {
       id: 1,
@@ -31,6 +36,17 @@ export class ProductosServicio {
 
   readonly productos = this.listaProductos.asReadonly();
 
+  constructor() {
+    this.cargar();
+  }
+
+  cargar(): void {
+    this.http.get<Producto[]>(this.url).subscribe({
+      next: (productos) => this.listaProductos.set(productos),
+      error: (error) => console.error('No fue posible cargar los productos.', error)
+    });
+  }
+
   obtenerProductos(): Producto[] {
     return this.listaProductos();
   }
@@ -45,6 +61,24 @@ export class ProductosServicio {
         producto.categoriaId === categoriaId
           ? { ...producto, categoriaId: null }
           : producto
+      )
+    );
+  }
+
+  crear(datos: Omit<Producto, 'id'>) {
+    return this.http.post<Producto>(this.url, datos).pipe(
+      tap((producto) =>
+        this.listaProductos.update((productos) => [...productos, producto])
+      )
+    );
+  }
+
+  actualizar(id: number, datos: Omit<Producto, 'id'>) {
+    return this.http.put<Producto>(`${this.url}/${id}`, datos).pipe(
+      tap((producto) =>
+        this.listaProductos.update((productos) =>
+          productos.map((actual) => actual.id === id ? producto : actual)
+        )
       )
     );
   }
