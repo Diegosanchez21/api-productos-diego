@@ -4,6 +4,38 @@
   <span>Selecciona un producto para consultar su información completa.</span>
 </header>
 
+<section class="panel-producto" aria-label="Formulario de producto">
+  <h2>{{ idProductoEnEdicion === null ? 'Registrar producto' : 'Editar producto' }}</h2>
+  <form (ngSubmit)="guardarProducto()">
+    <label for="productoNombre">Nombre</label>
+    <input id="productoNombre" name="productoNombre" [(ngModel)]="nombreProducto" required />
+
+    <label for="productoDescripcion">Descripción</label>
+    <textarea id="productoDescripcion" name="productoDescripcion" [(ngModel)]="descripcionProducto" required></textarea>
+
+    <label for="productoPrecio">Precio</label>
+    <input id="productoPrecio" name="productoPrecio" type="number" min="0.01" step="0.01" [(ngModel)]="precioProducto" required />
+
+    <label for="productoCategoria">Categoría</label>
+    <select id="productoCategoria" name="productoCategoria" [(ngModel)]="categoriaProductoId" required>
+      <option [ngValue]="null" disabled>Selecciona una categoría</option>
+      @for (categoria of categorias(); track categoria.id) {
+        <option [ngValue]="categoria.id">{{ categoria.nombre }}</option>
+      }
+    </select>
+
+    <div class="acciones-formulario">
+      <button type="submit">{{ idProductoEnEdicion === null ? 'Registrar producto' : 'Guardar cambios' }}</button>
+      @if (idProductoEnEdicion !== null) {
+        <button type="button" class="secundario" (click)="cancelarEdicionProducto()">Cancelar</button>
+      }
+    </div>
+  </form>
+  @if (mensajeProducto) {
+    <p-message severity="info" closable (onClose)="mensajeProducto = null">{{ mensajeProducto }}</p-message>
+  }
+</section>
+
 <section class="filtros" aria-label="Filtrar productos por categoría">
   <button
     type="button"
@@ -33,10 +65,13 @@
 
 <section class="cuadricula">
   @for (producto of productos(); track producto.id) {
-    <app-tarjeta-producto
-      [producto]="producto"
-      (agregado)="alAgregarFavorito($event)"
-    />
+    <article class="producto-con-edicion">
+      <app-tarjeta-producto
+        [producto]="producto"
+        (agregado)="alAgregarFavorito($event)"
+      />
+      <button type="button" class="editar-producto" (click)="editarProducto(producto)">Editar producto</button>
+    </article>
   } @empty {
     <p>No hay productos para la categoría seleccionada.</p>
   }
