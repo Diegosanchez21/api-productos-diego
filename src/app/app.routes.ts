@@ -19,6 +19,11 @@ export const routes: Routes = [
       )
   },
   {
+    path: 'categorias',
+    loadComponent: () =>
+      import('./paginas/categorias/categorias').then((archivo) => archivo.Categorias)
+  },
+  {
     path: 'favoritos',
     loadComponent: () =>
       import('./paginas/favoritos/favoritos').then((archivo) => archivo.Favoritos)

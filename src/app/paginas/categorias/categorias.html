@@ -1,0 +1,56 @@
+<header class="encabezado">
+  <p>ORGANIZACIÓN DEL CATÁLOGO</p>
+  <h1>Categorías</h1>
+  <span>Registra, edita o elimina categorías y selecciona una tarjeta para ver sus productos.</span>
+</header>
+
+@if (mensaje) {
+  <p-message severity="success" closable (onClose)="mensaje = null">{{ mensaje }}</p-message>
+}
+
+<section class="panel-formulario" aria-label="Formulario de categorías">
+  <h2>{{ idEnEdicion === null ? 'Registrar categoría' : 'Editar categoría' }}</h2>
+  <form (ngSubmit)="guardar()">
+    <label for="nombreCategoria">Nombre</label>
+    <input id="nombreCategoria" name="nombreCategoria" [(ngModel)]="nombre" maxlength="100" required />
+    <div class="acciones-formulario">
+      <button type="submit">{{ idEnEdicion === null ? 'Registrar' : 'Guardar cambios' }}</button>
+      @if (idEnEdicion !== null) {
+        <button type="button" class="secundario" (click)="cancelarEdicion()">Cancelar</button>
+      }
+    </div>
+  </form>
+</section>
+
+<section class="cuadricula-categorias" aria-label="Categorías disponibles">
+  @for (categoria of categorias(); track categoria.id) {
+    <article class="tarjeta-categoria" [class.seleccionada]="categoriaSeleccionada() === categoria.id">
+      <button type="button" class="selector" (click)="seleccionar(categoria.id)">
+        <strong>{{ categoria.nombre }}</strong>
+        <span>{{ categoria.totalProductos }} producto(s)</span>
+      </button>
+      <div class="acciones-categoria">
+        <button type="button" class="enlace" (click)="editar(categoria.id, categoria.nombre)">Editar</button>
+        <button type="button" class="enlace peligro" (click)="eliminar(categoria.id)">Eliminar</button>
+      </div>
+    </article>
+  } @empty {
+    <p>Aún no hay categorías. Registra la primera.</p>
+  }
+</section>
+
+@if (categoriaSeleccionada() !== null) {
+  <section class="productos-relacionados">
+    <h2>Productos relacionados</h2>
+    @if (mensajeFavorito) {
+      <p-message severity="success" closable (onClose)="mensajeFavorito = null">{{ mensajeFavorito }}</p-message>
+    }
+    <div class="cuadricula-productos">
+      @for (producto of productosFiltrados(); track producto.id) {
+        <app-tarjeta-producto [producto]="producto" (agregado)="alAgregarFavorito($event)" />
+      } @empty {
+        <p>Esta categoría todavía no tiene productos asignados.</p>
+      }
+    </div>
+  </section>
+}

@@ -3,4 +3,5 @@ export interface Producto {
   nombre: string;
   descripcion: string;
   precio: number;
+  categoriaId: number | null;
 }

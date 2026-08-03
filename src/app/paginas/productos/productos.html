@@ -4,6 +4,27 @@
   <span>Selecciona un producto para consultar su información completa.</span>
 </header>
 
+<section class="filtros" aria-label="Filtrar productos por categoría">
+  <button
+    type="button"
+    class="categoria-boton"
+    [class.seleccionada]="categoriaSeleccionada() === null"
+    (click)="seleccionarCategoria(null)"
+  >
+    Todos <span>{{ productosServicio.obtenerProductos().length }}</span>
+  </button>
+  @for (categoria of categorias(); track categoria.id) {
+    <button
+      type="button"
+      class="categoria-boton"
+      [class.seleccionada]="categoriaSeleccionada() === categoria.id"
+      (click)="seleccionarCategoria(categoria.id)"
+    >
+      {{ categoria.nombre }} <span>{{ categoria.totalProductos }}</span>
+    </button>
+  }
+</section>
+
 @if (mensajeFavorito) {
   <p-message severity="success" closable (onClose)="mensajeFavorito = null">
     {{ mensajeFavorito }}
@@ -11,12 +32,12 @@
 }
 
 <section class="cuadricula">
-  @for (producto of productos; track producto.id) {
+  @for (producto of productos(); track producto.id) {
     <app-tarjeta-producto
       [producto]="producto"
       (agregado)="alAgregarFavorito($event)"
     />
   } @empty {
-    <p>No hay productos disponibles.</p>
+    <p>No hay productos para la categoría seleccionada.</p>
   }
 </section>

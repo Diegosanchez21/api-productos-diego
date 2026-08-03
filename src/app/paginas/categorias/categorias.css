@@ -1,0 +1,22 @@
+.encabezado { margin-bottom: 1.5rem; }
+.encabezado p { color: var(--p-primary-color); font-size: .8rem; font-weight: 800; letter-spacing: .08em; margin-bottom: .4rem; }
+.encabezado h1 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: .5rem; }
+.encabezado span { color: #4b5563; }
+
+.panel-formulario { background: #f8fafc; border: 1px solid #e5e7eb; border-radius: 1rem; margin: 1rem 0 1.5rem; padding: 1.25rem; }
+.panel-formulario h2, .productos-relacionados h2 { margin-top: 0; }
+.panel-formulario form { align-items: end; display: flex; flex-wrap: wrap; gap: .75rem; }
+.panel-formulario label { display: block; font-weight: 700; width: 100%; }
+.panel-formulario input { border: 1px solid #9ca3af; border-radius: .5rem; font: inherit; padding: .65rem; min-width: min(100%, 20rem); }
+.acciones-formulario, .acciones-categoria { display: flex; gap: .5rem; }
+button { border: 0; border-radius: .5rem; background: var(--p-primary-color); color: white; cursor: pointer; font: inherit; font-weight: 700; padding: .65rem .85rem; }
+button.secundario, button.enlace { background: #e5e7eb; color: #374151; }
+button.peligro { color: #b91c1c; }
+.cuadricula-categorias, .cuadricula-productos { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.tarjeta-categoria { border: 1px solid #d1d5db; border-radius: 1rem; overflow: hidden; }
+.tarjeta-categoria.seleccionada { border: 2px solid var(--p-primary-color); }
+.selector { background: transparent; color: #1f2937; display: grid; gap: .3rem; text-align: left; width: 100%; }
+.selector span { color: #6b7280; font-size: .9rem; font-weight: 400; }
+.acciones-categoria { border-top: 1px solid #e5e7eb; padding: .65rem; }
+.productos-relacionados { margin-top: 2rem; }
+@media (max-width: 500px) { .panel-formulario input { width: 100%; } }

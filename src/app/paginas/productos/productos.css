@@ -24,3 +24,32 @@
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 1.25rem;
 }
+
+.filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+  margin: 0 0 1.5rem;
+}
+
+.categoria-boton {
+  border: 1px solid #d1d5db;
+  border-radius: .75rem;
+  background: white;
+  color: #374151;
+  cursor: pointer;
+  padding: .7rem .9rem;
+  font: inherit;
+  font-weight: 700;
+}
+
+.categoria-boton:hover, .categoria-boton.seleccionada {
+  border-color: var(--p-primary-color);
+  background: var(--p-primary-color);
+  color: white;
+}
+
+.categoria-boton span {
+  margin-left: .35rem;
+  opacity: .8;
+}
